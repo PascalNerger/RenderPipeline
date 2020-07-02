@@ -1,0 +1,74 @@
+#pragma once
+
+#include "PBR/Core/BaseTypes.h"
+#include "PBR/Core/RefCounting.h"
+
+#include "Texture.h"
+
+
+namespace EngineCore
+{
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	// TextureAttachment ///////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	enum class TextureAttachment
+	{
+
+		None = 0,
+
+		Color = 1,
+		Color0 = 1,
+		Color1 = 2,
+		Color2 = 3,
+		Color3 = 4,
+
+		Depth = 5,
+
+		Stencil = 6
+
+	};
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	// FrameBufferCreateInfo ///////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	struct FrameBufferCreateInfo
+	{
+
+		bool RenderColorBuffer = true;
+
+	};
+
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+	// FrameBuffer /////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	struct FrameBuffer : public RefCountedObject
+	{
+
+		virtual ~FrameBuffer() { }
+
+
+		virtual void Bind() const = 0;
+		virtual void Unbind() const = 0;
+
+		virtual void Attach(const Ref<Texture2D>& texture, const TextureAttachment attachment = TextureAttachment::Color) = 0;
+		virtual void Attach(const Ref<TextureCube>& cubeMap, const CubeMapOrientation orientation, const TextureAttachment attachment = TextureAttachment::Color, const uint32 mipLevel = 0) = 0;
+
+		virtual void Resize(const uint32 width, const uint32 height) = 0;
+
+		virtual void Clear() = 0;
+
+		virtual uint32 GetWidth() const = 0;
+		virtual uint32 GetHeight() const = 0;
+
+
+		static Ref<FrameBuffer> Create(const uint32 width, const uint32 height, const FrameBufferCreateInfo& createInfo = FrameBufferCreateInfo());
+
+	};
+
+	using FrameBufferRef = Ref<FrameBuffer>;
+
+}

@@ -38,10 +38,13 @@ Shows how the bloom effect acts in a scene full of spheres.
 ![Bloom](Images/Bloom.png)
 
 Shows reflections through image-based lighting on spheres with a highly reflective golden material.
-![Bloom](Images/Reflection.png)
+![Reflection](Images/Reflection.png)
 
 Shows an example scene (rendered with cubes only).
-![Bloom](Images/Scene1.png)
+![Scene 1](Images/Scene1.png)
 
 Shows another example scene (rendered with cubes only).
-![Bloom](Images/Scene2.png)
+![Scene 2](Images/Scene2.png)
+
+Shows how parallax occlusion mapping affects the surface of an object.
+![Parallax Occlusion Mapping](Images/ParallaxOcclusionMapping.png)
